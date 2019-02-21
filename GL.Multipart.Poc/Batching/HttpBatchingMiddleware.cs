@@ -40,10 +40,6 @@ namespace GL.Multipart.Poc.Batching
                 // Start a multipart container 
                 var outerContent = new MultipartContent("batch");
 
-                // Multipart response message
-                var outerResp = new HttpResponseMessage(HttpStatusCode.OK);
-                outerResp.Content = outerContent;
-
                 // Read the multipart request
                 var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
                 var boundary = HeaderUtilities.RemoveQuotes(mediaTypeHeaderValue.Boundary);
