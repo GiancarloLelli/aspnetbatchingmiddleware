@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 
@@ -43,10 +44,14 @@ namespace GL.Multipart.Client
             patch.Headers.TryAddWithoutValidation("Content-Type", "text/plain");
             batchContent.Add(new HttpMessageContent(patch));
 
+            var stop = new Stopwatch();
+
+            stop.Start();
             var result = client.SendAsync(batchRequest).GetAwaiter().GetResult();
             var content = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            Console.WriteLine(result.ToString());
-            Console.WriteLine(content.ToString());
+            stop.Stop();
+
+            Console.WriteLine($"Elapsed MS: {stop.ElapsedMilliseconds}");
 
             reset.WaitOne();
         }
