@@ -16,10 +16,10 @@ namespace GL.Sdk.Http.Batching
 {
     public class HttpBatchingMiddleware
     {
-        private const int BOUNDARY_LIMIT = 70;
         private const int BATCH_SIZE = 100;
-        private const string CONTENT_TYPE = "multipart/batch";
+        private const int BOUNDARY_LIMIT = 70;
         private const string SUBTYPE = "batch";
+        private const string CONTENT_TYPE = "multipart/batch";
 
         private readonly RequestDelegate _next;
         private readonly HttpBatchingMiddlewareOptions _options;
@@ -74,8 +74,11 @@ namespace GL.Sdk.Http.Batching
 
                     // Return the multipart response to caller
                     await context.ServeMultipartContent(new MultipartContentResult(outerContent));
+
                     return;
                 }
+
+                await _next.Invoke(context);
             }
         }
     }
