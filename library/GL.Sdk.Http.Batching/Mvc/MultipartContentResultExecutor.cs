@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Threading.Tasks;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching.Mvc
 {
     public class MultipartContentResultExecutor : IActionResultExecutor<MultipartContentResult>
     {

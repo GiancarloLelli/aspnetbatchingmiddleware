@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GL.Sdk.Http.Batching.Configuration;
+using GL.Sdk.Http.Batching.Extensions;
+using GL.Sdk.Http.Batching.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Routing;
@@ -12,7 +15,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching
 {
     public class HttpBatchingMiddleware
     {

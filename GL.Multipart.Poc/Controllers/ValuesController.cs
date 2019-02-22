@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace GL.Multipart.Poc.Controllers
 {
@@ -11,7 +7,6 @@ namespace GL.Multipart.Poc.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
@@ -19,7 +14,19 @@ namespace GL.Multipart.Poc.Controllers
         }
 
         [HttpPost]
-        public ActionResult<string> Get()
+        public ActionResult<string> Post()
+        {
+            return new StreamReader(Request.Body).ReadToEnd();
+        }
+
+        [HttpPut]
+        public ActionResult<string> Put()
+        {
+            return new StreamReader(Request.Body).ReadToEnd();
+        }
+
+        [HttpPatch]
+        public ActionResult<string> Patch()
         {
             return new StreamReader(Request.Body).ReadToEnd();
         }

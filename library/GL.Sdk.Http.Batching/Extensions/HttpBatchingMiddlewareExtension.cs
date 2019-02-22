@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GL.Sdk.Http.Batching.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching.Extensions
 {
     public static class HttpBatchingMiddlewareExtension
     {

@@ -27,9 +27,19 @@ namespace GL.Multipart.Client
             );
 
             var post = new HttpRequestMessage(HttpMethod.Post, new Uri("http://localhost:54942/api/values/"));
-            post.Content = new StringContent("Hello World");
+            post.Content = new StringContent("Hello World Post");
             post.Headers.TryAddWithoutValidation("Content-Type", "text/plain");
             batchContent.Add(new HttpMessageContent(post));
+
+            var put = new HttpRequestMessage(HttpMethod.Put, new Uri("http://localhost:54942/api/values/"));
+            put.Content = new StringContent("Hello World Put");
+            put.Headers.TryAddWithoutValidation("Content-Type", "text/plain");
+            batchContent.Add(new HttpMessageContent(put));
+
+            var patch = new HttpRequestMessage(HttpMethod.Patch, new Uri("http://localhost:54942/api/values/"));
+            patch.Content = new StringContent("Hello World Patch");
+            patch.Headers.TryAddWithoutValidation("Content-Type", "text/plain");
+            batchContent.Add(new HttpMessageContent(patch));
 
             var result = client.SendAsync(batchRequest).GetAwaiter().GetResult();
             var content = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();

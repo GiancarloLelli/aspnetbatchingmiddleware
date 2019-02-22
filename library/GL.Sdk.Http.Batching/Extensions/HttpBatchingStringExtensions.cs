@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching.Extensions
 {
-    public static class HttpBatchingStringExtensions
+    internal static class HttpBatchingStringExtensions
     {
+        private const char SPACE = ' ';
+        private const char COLUMN = ':';
+        private const string PATCH = "PATCH";
+
         public static HttpRequestMessage ReadAsHttpRequestMessage(this string rawRequest)
         {
-            var requestLines = rawRequest.Split(Environment.NewLine);
+            var requestLines = rawRequest.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             // Verb and location
-            var requestInfo = requestLines[0].Split(" ");
+            var requestInfo = requestLines[0].Split(SPACE);
             var method = requestInfo[0];
             var location = requestInfo[1];
 
@@ -30,7 +34,7 @@ namespace GL.Multipart.Poc.Batching
                     break;
                 }
 
-                var columnIndex = headerLine.IndexOf(':');
+                var columnIndex = headerLine.IndexOf(COLUMN);
                 var headerName = headerLine.Substring(0, columnIndex);
                 var headerValue = headerLine.Substring((columnIndex + 1)).Trim();
                 headerDictionary.Add(headerName, headerValue);
@@ -38,7 +42,7 @@ namespace GL.Multipart.Poc.Batching
 
             // Body set
             string requestBody = null;
-            if (method.Equals("POST") || method.Equals("PUT"))
+            if (method.Equals(HttpMethod.Post.Method) || method.Equals(HttpMethod.Put.Method) || method.Equals(PATCH))
             {
                 if (requestLines.Length > bodyIndex)
                 {

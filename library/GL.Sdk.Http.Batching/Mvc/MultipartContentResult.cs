@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching.Mvc
 {
     public class MultipartContentResult : IActionResult
     {

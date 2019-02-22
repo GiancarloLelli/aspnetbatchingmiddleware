@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace GL.Multipart.Poc.Batching
+namespace GL.Sdk.Http.Batching.Configuration
 {
     public class HttpBatchingMiddlewareOptions
     {
