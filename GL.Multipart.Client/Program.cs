@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 
 namespace GL.Multipart.Client
 {
@@ -7,6 +8,7 @@ namespace GL.Multipart.Client
     {
         static void Main(string[] args)
         {
+            var reset = new ManualResetEvent(false);
             var client = new HttpClient();
 
             var batchRequest = new HttpRequestMessage(
@@ -44,6 +46,9 @@ namespace GL.Multipart.Client
             var result = client.SendAsync(batchRequest).GetAwaiter().GetResult();
             var content = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             Console.WriteLine(result.ToString());
+            Console.WriteLine(content.ToString());
+
+            reset.WaitOne();
         }
     }
 }
